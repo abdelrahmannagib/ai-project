@@ -1,7 +1,9 @@
 import pandas as pd
 from sklearn.preprocessing import LabelEncoder
 from sklearn.model_selection import train_test_split
-from sklearn.svm import SVC
+from sklearn import svm
+from sklearn.tree import DecisionTreeClassifier
+from sklearn import metrics
 df = pd.read_csv('loan_data.csv')
 
 #removing null rows
@@ -41,7 +43,26 @@ y = df["Loan_Status"]
 x_train, x_test,y_train,y_test = train_test_split(x,y,test_size=0.2,shuffle=True)
 # Data shape before and after splitting
 print(x.shape, x_train.shape, x_test.shape)
-model = SVC()
+
+model = svm.SVC(random_state=0)
 model.fit(x_train, y_train)
 accuracy = model.score(x_test, y_test)
-print(accuracy)
+print('SVM Accuracy:',accuracy)
+
+#Decision Tree Classification
+
+model2 = DecisionTreeClassifier(criterion='entropy', random_state=0)
+model2.fit(x_train, y_train)
+
+y_predict = model2.predict(x_test)
+
+accuracy_DecisionTree = metrics.accuracy_score(y_test,y_predict)
+
+print('Decision Tree Classifier Accuracy:',accuracy_DecisionTree)
+
+
+
+
+
+
+
