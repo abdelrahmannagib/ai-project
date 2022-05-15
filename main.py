@@ -1,8 +1,10 @@
 import pandas as pd
+import numpy as np
 from sklearn.preprocessing import LabelEncoder
 from sklearn.model_selection import train_test_split
 from sklearn import svm
 from sklearn.tree import DecisionTreeClassifier
+from  sklearn.linear_model import LogisiticRegression
 from sklearn import metrics
 df = pd.read_csv('loan_data.csv')
 
@@ -59,6 +61,21 @@ y_predict = model2.predict(x_test)
 accuracy_DecisionTree = metrics.accuracy_score(y_test,y_predict)
 
 print('Decision Tree Classifier Accuracy:',accuracy_DecisionTree)
+
+#Logistic_regression
+Lr =LogisiticRegression()
+Lr.fit(x_train,y_train)
+
+Lr_pred=Lr.predict(x_test)
+
+
+
+
+print('Acc :' ,metrics.accuracy_score)
+
+print("y_predicted",Lr_pred)
+print("y_test",y_test)
+
 
 
 
